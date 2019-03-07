@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Top />
     <router-view/>
   </div>
 </template>
@@ -27,3 +24,12 @@
   }
 }
 </style>
+
+<script>
+import Top from '@/components/Top';
+
+export default {
+  name: 'App',
+  components: {Top}
+}
+</script>
