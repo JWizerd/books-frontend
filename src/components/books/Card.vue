@@ -1,5 +1,5 @@
 <template>
-    <article class="country-card">
+    <article class="book-card">
         {{book.name}}
         <div class="right">
             <strong>
@@ -13,10 +13,12 @@
         </h1>
         <hr>
         <p>{{book.capital}}</p>
-        <div v-for="(data, index) in book.currencies">
-            <p>{{data.code}}</p>
-            <p>{{data.name}}</p>
-            <p>{{data.symbol}}</p>
+        <div v-for="(currency, index) in book.currencies" :key="index">
+            <div>
+                <p>{{currency.code}}</p>
+                <p>{{currency.name}}</p>
+                <p>{{currency.symbol}}</p>
+            </div>
         </div>
     </article>
 </template>
