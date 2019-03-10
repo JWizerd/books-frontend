@@ -26,8 +26,8 @@ export default class Client {
     return await this.getClient().post('', payload);
   }
 
-  async updateEndpoint(id, payload) {
-    return await this.getClient().post(id, payload);
+  async update(id, payload) {
+    return await this.getClient().put(id, payload);
   }
 
   async delete(id) {

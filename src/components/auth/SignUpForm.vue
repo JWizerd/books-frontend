@@ -54,22 +54,19 @@ export default {
         password: "",
         password_confirmation: ""
       },
-      errors: [],
-      messages: []
+      error: {}
     };
   },
   methods: {
     signUp() {
       try {
-        const signUpUser = new Auth().signup({ ...this.user });
+        new Auth()
+          .signup({ ...this.user })
+          .then(response => this.$router.push("/login"))
+          .catch(error => (this.error = error.data.message));
       } catch (error) {
-        console.log(error);
+        error => (this.error = error.data.message);
       }
-    }
-  },
-  computed: {
-    error: function() {
-      return this.$store.getters.error;
     }
   }
 };

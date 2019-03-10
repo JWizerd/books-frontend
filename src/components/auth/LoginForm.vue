@@ -4,15 +4,21 @@
     <div class="form">
       <h1>Login</h1>
       <label name="name"></label>
-      <input name="name" id="name" type="text" placeholder="Enter name...">
+      <input v-model.trim="name" name="name" id="name" type="text" placeholder="Enter name...">
       
       <label name="email"></label>
-      <input name="email" id="email" type="text" placeholder="Enter email...">
+      <input v-model.trim="email" name="email" id="email" type="text" placeholder="Enter email...">
       
       <label name="password"></label>
-      <input name="password" id="password" type="text" placeholder="Enter password...">
+      <input
+        v-model.trim="password"
+        name="password"
+        id="password"
+        type="text"
+        placeholder="Enter password..."
+      >
       
-      <button @click="click">LOGIN</button>
+      <button @click="login">LOGIN</button>
     </div>
   </section>
 </template>
@@ -20,12 +26,29 @@
 <script>
 export default {
   name: "LoginForm",
+  data() {
+    return {
+      user: {
+        email: "",
+        password: ""
+      },
+      errors: [],
+      messages: []
+    };
+  },
   methods: {
-    click: function() {
-      const name = document.getElementById("book").value;
-      const email = document.getElementById("email").value;
-
-      this.$store.dispatch("login", { email, password });
+    login() {
+      try {
+        new Auth.login(user)
+          .then(auth => {
+            console.log(auth);
+            // window.localStorage.setItem(auth.token);
+            // this.$store.commit("setAuthenticated");
+          })
+          .catch(error => console.log(error));
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
   computed: {
