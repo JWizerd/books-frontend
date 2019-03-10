@@ -2,14 +2,14 @@ import axios from "axios";
 
 class Client {
   static getClient() {
-    return axios.create({
-      baseURL: process.env.BOOKS_API,
-      timeout: 15000,
-      headers: {
-        'Authorization': "Basic ".process.env.BOOKS_API_SECRET,
-        'ContentType': "application/json"
-      }
-    });
+    let instance = axios.create();
+
+    instance.defaults.baseURL = process.env.BOOKS_API;
+    instance.defaults.header.common['Content-Type'] = 'application/json';
+
+    if (window.localStorage.getItem('token')) {
+      instance.defaults.header.common['X-Authorization'] = window.localStorage.getItem('token');
+    }
   }
   static list() {
     return this.getClient().get(this.getResource());
