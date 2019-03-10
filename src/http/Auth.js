@@ -12,4 +12,12 @@ export default class Auth extends Client {
     async login(payload) {
         return await this.getClient().post('login', payload);
     }
+
+    async getUser() {
+        return await this.getClient().get('user');
+    }
+
+    async logout() {
+        return await this.getClient().get('logout');
+    }
 }

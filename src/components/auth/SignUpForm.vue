@@ -1,9 +1,6 @@
 <template>
   <section>
     <div v-if="error" class="error">{{error}}</div>
-    <ul v-for="(message, key) in messages" :key="key">
-      <li :key="key">{{message}}</li>
-    </ul>
     <div class="form">
       <h1>Register</h1>
       <label name="name"></label>
@@ -54,7 +51,7 @@ export default {
         password: "",
         password_confirmation: ""
       },
-      error: {}
+      error: null
     };
   },
   methods: {
@@ -65,7 +62,7 @@ export default {
           .then(response => this.$router.push("/login"))
           .catch(error => (this.error = error.data.message));
       } catch (error) {
-        error => (this.error = error.data.message);
+        error => (this.error = error.message);
       }
     }
   }

@@ -3,18 +3,21 @@
     <div v-if="error" class="error">{{error}}</div>
     <div class="form">
       <h1>Login</h1>
-      <label name="name"></label>
-      <input v-model.trim="name" name="name" id="name" type="text" placeholder="Enter name...">
-      
       <label name="email"></label>
-      <input v-model.trim="email" name="email" id="email" type="text" placeholder="Enter email...">
+      <input
+        v-model.trim="user.email"
+        name="email"
+        id="email"
+        type="text"
+        placeholder="Enter email..."
+      >
       
       <label name="password"></label>
       <input
-        v-model.trim="password"
+        v-model.trim="user.password"
         name="password"
         id="password"
-        type="text"
+        type="password"
         placeholder="Enter password..."
       >
       
@@ -24,13 +27,16 @@
 </template>
 
 <script>
+import Auth from "@/http/Auth";
+
 export default {
   name: "LoginForm",
   data() {
     return {
       user: {
         email: "",
-        password: ""
+        password: "",
+        remember_me: false
       },
       errors: [],
       messages: []
@@ -39,11 +45,12 @@ export default {
   methods: {
     login() {
       try {
-        new Auth.login(user)
+        new Auth()
+          .login(this.user)
           .then(auth => {
-            console.log(auth);
-            // window.localStorage.setItem(auth.token);
-            // this.$store.commit("setAuthenticated");
+            window.localStorage.setItem(auth.data.token);
+            this.$store.commit("setAuthenticated");
+            this.$store.dispatch("cacheUser");
           })
           .catch(error => console.log(error));
       } catch (error) {

@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     books: [],
     errors: [],
-    authenticated: 0
+    authenticated: false,
+    user: {}
   },
   mutations: {
     setBook(state, country) {
@@ -23,13 +24,23 @@ export default new Vuex.Store({
       state.books = filtered;
     },
     setAuthenticated(state) {
-      state.autheticated = 1;
+      state.autheticated = true;
+    },
+    setUser(state, user) {
+      state.user = user
+    },
+    removeUser(state) {
+      state.user = {}
+    },
+    unAuthenticate(state) {
+      state.authenticated = false
     }
   },
   getters: {
     books: state => state.books,
     errors: state => state.errors,
-    authenticated: state => state.authenticated
+    authenticated: state => state.authenticated,
+    user: state => state.user
   },
   actions: {
     storeBook({ commit }, book) {
@@ -37,19 +48,29 @@ export default new Vuex.Store({
         .then(books => commit("setBook", books.data[0]))
         .catch(errors => commit("setError", errors.message));
     },
-    logout({ commit, state }, user) {
+    logout({ commit }) {
       try {
-        new Auth.login(user)
+        new Auth().logout()
           .then(auth => {
-            console.log(auth)
+            commit("unAuthenticate")
+            commit("removeUser")
           })
-          .catch(error => commit("setError", error.message));
+          .catch(error => commit("setError", error.data.message));
       } catch (error) {
         commit("setError", error.message);
       }
     },
-    getUser() {
-
+    cacheUser({ commit }) {
+      try {
+        new Auth()
+          .getUser()
+          .then(user => {
+            commit("setUser", user.data)
+          })
+          .catch(error => commit("setError", error.data.message));
+      } catch (error) {
+        commit("setError", error.message);
+      }
     }
   }
 });
