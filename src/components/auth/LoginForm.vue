@@ -45,6 +45,7 @@ export default {
   methods: {
     login() {
       this.$store.dispatch("login", this.user);
+      this.$router.push("/books");
     }
   },
   computed: {

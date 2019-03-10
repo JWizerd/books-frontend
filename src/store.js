@@ -7,26 +7,25 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    books: [],
-    errors: [],
+    books: {},
+    errors: {},
     user: {}
   },
   mutations: {
-    setBook(state, country) {
-      state.books.push(country);
+    setBook(state, books) {
+      state.books = books;
     },
     setError(state, error) {
       state.errors.push(error);
     },
     deleteBook(state, book) {
-      const filtered = state.books.filter((item, index) => index !== book);
-      state.books = filtered;
+      delete (state.books[`${book.key}`])
     },
     setUser(state, user) {
       state.user = user
     },
     removeUser(state) {
-      state.user = {}
+      delete state.user
     }
   },
   getters: {
@@ -35,10 +34,14 @@ export default new Vuex.Store({
     user: state => state.user
   },
   actions: {
-    storeBook({ commit }, book) {
-      get(`https://restcountries.eu/rest/v2/name/${book}`)
-        .then(books => commit("setBook", books.data[0]))
-        .catch(errors => commit("setError", errors.message));
+    storeBook({ commit, state }, book) {
+      new Book().store(book)
+        .then(book => {
+          const books = { ...state.books }
+          books[`book-${Date.now()}`] = book.data
+          commit("setBook", books)
+        })
+        .catch(error => commit("setError", error.data.message));
     },
     logout({ commit }) {
       try {
@@ -74,7 +77,7 @@ export default new Vuex.Store({
           .then(user => {
             commit("setUser", user.data)
           })
-          .catch(error => commit("setError", error.message));
+          .catch(error => commit("setError", error.data.message));
       } catch (error) {
         commit("setError", error.message);
       }

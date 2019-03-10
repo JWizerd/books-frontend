@@ -14,7 +14,7 @@ export default class Client {
     return instance
   }
 
-  async list() {
+  async show() {
     return await this.getClient().get('');
   }
 
@@ -22,7 +22,7 @@ export default class Client {
     return await this.getClient().get(id);
   }
 
-  async insert(payload) {
+  async store(payload) {
     return await this.getClient().post('', payload);
   }
 
@@ -30,7 +30,7 @@ export default class Client {
     return await this.getClient().put(id, payload);
   }
 
-  async delete(id) {
+  async destroy(id) {
     return await this.getClient().get(id);
   }
 }

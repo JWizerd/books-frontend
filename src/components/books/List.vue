@@ -1,10 +1,11 @@
 <template>
   <div class="books">
-    <ul>
+    <ul v-if="books">
       <li class="country" v-for="(book, key) in books" :key="key">
         <Card v-bind:book="book" v-bind:index="index"/>
       </li>
     </ul>
+    <div v-else>No books here yet! Go ahead and add some!</div>
   </div>
 </template>
 
