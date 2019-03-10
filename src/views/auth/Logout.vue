@@ -6,9 +6,14 @@
 export default {
   name: "logout",
   mounted() {
-    try {
-      this.$store.dispatch("logout");
-    } catch (error) {}
+    console.log(this.$store.getters.authenticated);
+    // try {
+    //   if (this.$store.getters.authenticated) {
+    //     this.$store.dispatch("logout");
+    //   } else {
+    //     this.$router.push("/");
+    //   }
+    // } catch (error) {}
   }
 };
 </script>

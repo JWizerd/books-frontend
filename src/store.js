@@ -24,7 +24,7 @@ export default new Vuex.Store({
       state.books = filtered;
     },
     setAuthenticated(state) {
-      state.autheticated = true;
+      state.authenticated = true;
     },
     setUser(state, user) {
       state.user = user
