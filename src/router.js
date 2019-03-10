@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 import Create from "./views/books/Create.vue";
 import List from "./views/books/List.vue";
 import Login from "./views/user/Login.vue";
-import Register from "./views/user/Register.vue";
+import SignUp from "./views/user/SignUp.vue";
 
 Vue.use(Router);
 
@@ -31,9 +31,9 @@ export default new Router({
       component: Login
     },
     {
-      path: "/register",
-      name: "register",
-      component: Register
+      path: "/signup",
+      name: "signup",
+      component: SignUp
     }
   ]
 });

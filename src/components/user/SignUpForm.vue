@@ -2,7 +2,7 @@
   <section>
     <div v-if="error" class="error">{{error}}</div>
     <div class="form">
-      <h1>Login</h1>
+      <h1>Register</h1>
       <label name="name"></label>
       <input name="name" id="name" type="text" placeholder="Enter name...">
       
@@ -12,20 +12,28 @@
       <label name="password"></label>
       <input name="password" id="password" type="text" placeholder="Enter password...">
       
-      <button @click="click">LOGIN</button>
+      <label name="verify-password"></label>
+      <input
+        name="verify-password"
+        id="verify-password"
+        type="text"
+        placeholder="Verify password..."
+      >
+      
+      <button @click="click">Register</button>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: "Login",
+  name: "SignUpForm",
   methods: {
     click: function() {
       const name = document.getElementById("book").value;
       const email = document.getElementById("email").value;
 
-      this.$store.dispatch("login", { email, password });
+      this.$store.dispatch("register", { name, email });
     }
   },
   computed: {

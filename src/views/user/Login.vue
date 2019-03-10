@@ -1,14 +1,14 @@
 <template>
   <div class="login">
-    <Login/>
+    <LoginForm/>
   </div>
 </template>
 
 <script>
-import Login from "@/components/user/Login";
+import LoginForm from "@/components/user/LoginForm";
 // @ is an alias to /src
 export default {
-  components: { Login },
+  components: { LoginForm },
   name: "login"
 };
 </script>
