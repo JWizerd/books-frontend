@@ -6,7 +6,8 @@ class Client {
       baseURL: process.env.BOOKS_API,
       timeout: 15000,
       headers: {
-        "Authorization: ": "Basic ".process.env.BOOKS_API_SECRET
+        'Authorization': "Basic ".process.env.BOOKS_API_SECRET,
+        'ContentType': "application/json"
       }
     });
   }
