@@ -6,14 +6,13 @@
 export default {
   name: "logout",
   mounted() {
-    console.log(this.$store.getters.authenticated);
-    // try {
-    //   if (this.$store.getters.authenticated) {
-    //     this.$store.dispatch("logout");
-    //   } else {
-    //     this.$router.push("/");
-    //   }
-    // } catch (error) {}
+    try {
+      if (window.localStorage.getItem("authenticated") !== null) {
+        this.$store.dispatch("logout");
+      } else {
+        this.$router.push("/");
+      }
+    } catch (error) {}
   }
 };
 </script>

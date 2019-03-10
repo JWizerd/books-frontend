@@ -44,18 +44,7 @@ export default {
   },
   methods: {
     login() {
-      try {
-        new Auth()
-          .login(this.user)
-          .then(auth => {
-            window.localStorage.setItem("userToken", auth.data.token);
-            this.$store.commit("setAuthenticated");
-            this.$store.dispatch("cacheUser");
-          })
-          .catch(error => console.log(error));
-      } catch (error) {
-        console.log(error);
-      }
+      this.$store.dispatch("login", this.user);
     }
   },
   computed: {
