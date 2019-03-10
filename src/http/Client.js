@@ -7,8 +7,8 @@ export default class Client {
     instance.defaults.baseURL = `http://0.0.0.0:1111/api/${this.getResource()}/`;
     instance.defaults.headers.common['Content-Type'] = 'application/json';
 
-    if (window.localStorage.getItem('token') !== null) {
-      instance.defaults.headers.common['X-Authorization'] = window.localStorage.getItem('token');
+    if (window.localStorage.getItem('userToken') !== null) {
+      instance.defaults.headers.common['X-Authorization'] = `Bearer ${window.localStorage.getItem('userToken')}`;
     }
 
     return instance

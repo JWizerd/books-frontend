@@ -67,7 +67,7 @@ export default new Vuex.Store({
           .then(user => {
             commit("setUser", user.data)
           })
-          .catch(error => commit("setError", error.data.message));
+          .catch(error => commit("setError", error.message));
       } catch (error) {
         commit("setError", error.message);
       }

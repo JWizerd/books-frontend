@@ -48,7 +48,7 @@ export default {
         new Auth()
           .login(this.user)
           .then(auth => {
-            window.localStorage.setItem(auth.data.token);
+            window.localStorage.setItem("userToken", auth.data.token);
             this.$store.commit("setAuthenticated");
             this.$store.dispatch("cacheUser");
           })
