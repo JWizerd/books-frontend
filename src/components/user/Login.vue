@@ -1,33 +1,31 @@
 <template>
   <section>
-    <div v-if="error" class="error">
-      {{error}}
-    </div>
+    <div v-if="error" class="error">{{error}}</div>
     <div class="form">
       <h1>Login</h1>
       <label name="name"></label>
-      <input name="name" id="name" type="text" placeholder="Enter name..." />
-
+      <input name="name" id="name" type="text" placeholder="Enter name...">
+      
       <label name="email"></label>
-      <input name="email" id="email" type="text" placeholder="Enter email..." />
-
+      <input name="email" id="email" type="text" placeholder="Enter email...">
+      
       <label name="password"></label>
-      <input name="password" id="password" type="text" placeholder="Enter password..." />
-
-      <button @click="click">ADD BOOK</button>
+      <input name="password" id="password" type="text" placeholder="Enter password...">
+      
+      <button @click="click">LOGIN</button>
     </div>
   </section>
 </template>
 
 <script>
 export default {
-  name: 'Login',
+  name: "Login",
   methods: {
     click: function() {
-      const name = document.getElementById('book').value
-      const email = document.getElementById('email').value
+      const name = document.getElementById("book").value;
+      const email = document.getElementById("email").value;
 
-      this.$store.dispatch('login', {email, password})
+      this.$store.dispatch("login", { email, password });
     }
   },
   computed: {
@@ -35,7 +33,7 @@ export default {
       return this.$store.getters.error;
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -60,7 +58,7 @@ a {
 }
 
 .error {
-    color: red;
-    text-align: center;
+  color: red;
+  text-align: center;
 }
 </style>
