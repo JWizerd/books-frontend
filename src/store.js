@@ -54,6 +54,7 @@ export default new Vuex.Store({
           .then(auth => {
             commit("unAuthenticate")
             commit("removeUser")
+            window.localStorage.removeItem('userToken');
           })
           .catch(error => commit("setError", error.data.message));
       } catch (error) {
