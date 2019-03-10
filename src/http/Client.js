@@ -1,27 +1,34 @@
-import axios from 'axios'
+import axios from "axios";
 
 class Client {
-    resource;
+  static getClient() {
+    return axios.create({
+      baseURL: process.env.BOOKS_API,
+      timeout: 15000,
+      headers: {
+        "Authorization: ": "Basic ".process.env.BOOKS_API_SECRET
+      }
+    });
+  }
+  static list() {
+    return this.getClient().get(this.getResource());
+  }
 
-    static list() {
-        return axios.get(this.resource)
-    }
+  static get(id) {
+    return this.getClient().get(this.getResource() + "/" + id);
+  }
 
-    static get(id) {
-        return axios.get(this.resource + '/' + id)
-    }
+  static insert(payload) {
+    return this.getClient().post(this.getResource(), payload);
+  }
 
-    static insert(payload) {
-        return axios.post(this.resource, payload)
-    }
+  static updateEndpoint(id, payload) {
+    return this.getClient().post(this.getResource() + "/" + id, payload);
+  }
 
-    static updateEndpoint(id, payload) {
-        return axios.post(this.resource + '/' + id, payload)
-    }
-
-    static delete(id) {
-        return axios.get(this.resource + '/' + id)
-    }
+  static delete(id) {
+    return this.getClient().get(this.getResource() + "/" + id);
+  }
 }
 
-export default Client
+export default Client;

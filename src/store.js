@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { get } from '@/helpers/http.js'
+import Vue from "vue";
+import Vuex from "vuex";
+import Book from "@/http/Book";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -11,14 +11,14 @@ export default new Vuex.Store({
   },
   mutations: {
     setBook(state, country) {
-      state.books.push(country)
+      state.books.push(country);
     },
     setError(state, error) {
-      state.errors.push(error)
+      state.errors.push(error);
     },
     deleteBook(state, book) {
-      const filtered = state.books.filter((item,index) => index !== book)
-      state.books = filtered
+      const filtered = state.books.filter((item, index) => index !== book);
+      state.books = filtered;
     }
   },
   getters: {
@@ -26,10 +26,10 @@ export default new Vuex.Store({
     errors: state => state.errors
   },
   actions: {
-    storeBook: function({commit}, book) {
+    storeBook: function({ commit }, book) {
       get(`https://restcountries.eu/rest/v2/name/${book}`)
-      .then(books => commit('setBook', books.data[0]))
-      .catch(errors => commit('setError', errors.message))
+        .then(books => commit("setBook", books.data[0]))
+        .catch(errors => commit("setError", errors.message));
     }
   }
-})
+});

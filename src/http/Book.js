@@ -1,6 +1,8 @@
-import axios from 'axios'
-import Client from './Client';
+import axios from "axios";
+import Client from "./Client";
 
 class Book extends Client {
-    resource = 'book';
+  getResource() {
+    return "book";
+  }
 }
