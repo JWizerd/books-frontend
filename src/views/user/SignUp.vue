@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SignUpForm from "@/components/user/SignUpForm";
+import SignUpForm from "@/components/auth/SignUpForm";
 // @ is an alias to /src
 export default {
   components: { SignUpForm },

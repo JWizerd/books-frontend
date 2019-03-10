@@ -1,35 +1,36 @@
 import axios from "axios";
 
-class Client {
-  static getClient() {
+export default class Client {
+  getClient() {
     let instance = axios.create();
 
-    instance.defaults.baseURL = process.env.BOOKS_API;
-    instance.defaults.header.common['Content-Type'] = 'application/json';
+    instance.defaults.baseURL = 'http://0.0.0.0:1111/api/';
+    instance.defaults.headers.common['Content-Type'] = 'application/json';
 
-    if (window.localStorage.getItem('token')) {
-      instance.defaults.header.common['X-Authorization'] = window.localStorage.getItem('token');
+    if (window.localStorage.getItem('token') !== null) {
+      instance.defaults.headers.common['X-Authorization'] = window.localStorage.getItem('token');
     }
-  }
-  static list() {
-    return this.getClient().get(this.getResource());
+
+    return instance
   }
 
-  static get(id) {
-    return this.getClient().get(this.getResource() + "/" + id);
+  async list() {
+    return await this.getClient().get(this.getResource());
   }
 
-  static insert(payload) {
-    return this.getClient().post(this.getResource(), payload);
+  async get(id) {
+    return await this.getClient().get(this.getResource() + "/" + id);
   }
 
-  static updateEndpoint(id, payload) {
-    return this.getClient().post(this.getResource() + "/" + id, payload);
+  async insert(payload) {
+    return await this.getClient().post(this.getResource(), payload);
   }
 
-  static delete(id) {
-    return this.getClient().get(this.getResource() + "/" + id);
+  async updateEndpoint(id, payload) {
+    return await this.getClient().post(this.getResource() + "/" + id, payload);
+  }
+
+  async delete(id) {
+    return await this.getClient().get(this.getResource() + "/" + id);
   }
 }
-
-export default Client;

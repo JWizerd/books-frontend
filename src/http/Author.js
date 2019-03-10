@@ -1,5 +1,7 @@
 import Client from './Client';
 
-class Author extends Client {
-    resource = 'author';
+export default class Author extends Client {
+    getResource() {
+        return "author";
+    }
 }
