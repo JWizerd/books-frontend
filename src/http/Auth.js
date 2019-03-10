@@ -6,10 +6,10 @@ export default class Auth extends Client {
     }
 
     async signup(payload) {
-        return await this.getClient().post(this.getResource() + '/signup', payload);
+        return await this.getClient().post('signup', payload);
     }
 
     async login(payload) {
-        return await this.getClient().post(this.getResource() + '/login', payload);
+        return await this.getClient().post('login', payload);
     }
 }
