@@ -34,15 +34,6 @@ export default new Vuex.Store({
     user: state => state.user
   },
   actions: {
-    storeBook({ commit, state }, book) {
-      new Book().store(book)
-        .then(book => {
-          const books = { ...state.books }
-          books[`book-${Date.now()}`] = book.data
-          commit("setBook", books)
-        })
-        .catch(error => commit("setError", error.data.message));
-    },
     logout({ commit }) {
       try {
         new Auth().logout()

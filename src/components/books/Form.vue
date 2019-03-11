@@ -1,5 +1,8 @@
 <template>
   <section>
+    <div v-for="(error, key) in errors" :key="key">
+      <strong>{{error}}</strong>
+    </div>
     <div v-if="error" class="error">{{error}}</div>
     <div class="form">
       <h1>Add a book to your library</h1>
@@ -26,6 +29,8 @@
 </template>
 
 <script>
+import Book from "@/http/Book";
+
 export default {
   name: "Form",
   data() {
@@ -35,13 +40,22 @@ export default {
         description: "",
         publication_date: "",
         author: ""
-      }
+      },
+      errors: {}
     };
   },
   methods: {
     store() {
-      this.$store.dispatch("storeBook", this.book);
-      this.$router.push("/books");
+      new Book()
+        .store(this.book)
+        .then(() => {
+          this.$router.push("/books");
+        })
+        .catch(error => {
+          const errors = { ...this.errors };
+          errors[`book-${Date.now()}`] = error.message;
+          this.errors = errors;
+        });
     }
   },
   computed: {
