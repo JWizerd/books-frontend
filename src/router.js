@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
 import Create from "./views/books/Create.vue";
 import Update from "./views/books/Update.vue";
 import List from "./views/books/List.vue";

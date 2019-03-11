@@ -1,51 +1,28 @@
 <template>
-  <li class="book-card">
-    <h1>{{book.title}}</h1>
-    <hr>
-    <p v-if="book.author">By: {{book.author.first_name}} {{book.author.last_name}}</p>
-    <hr>
-    <p v-if="book.description">{{book.description}}</p>
-    <div>
-      <button class="button button--warn" @click="deleteBook">DELETE</button>
+  <li class="book-card border-black p-10 mt-10 mb-10 bg-white rounded-b shadow">
+    <div class="mb-8">
+      <h3>{{book.title}}</h3>
+      <hr>
+      <p class="text-grey-darker text-base" v-if="book.description">{{book.description}}</p>
+      <hr>
+    </div>
+    <div class="text-sm">
+      <p class="text-black leading-none">By: {{book.author.first_name}} {{book.author.last_name}}</p>
+      <p class="text-grey-dark mt-2">Published: {{ book.publication_date }}</p>
+    </div>
+    <div class="mt-3">
+      <button
+        class="bg-red hover:bg-red-dark text-white py-2 px-4 rounded focus:outline-none mr-2 text-sm"
+        @click="deleteBook"
+      >DELETE</button>
       <router-link
         :to="{ name: 'update', params: { id: book.id }}"
-        class="button button--notice"
+        class="bg-green hover:bg-green-dark text-white py-2 px-4 rounded focus:outline-none text-sm"
         tag="button"
       >UPDATE</router-link>
     </div>
   </li>
 </template>
-
-<style lang="scss">
-.button {
-  padding: 10px 25px;
-  margin: 10px;
-  border: none;
-  font-size: 1em;
-  border-radius: 5px;
-  &:hover {
-    cursor: pointer;
-    background: #333;
-  }
-}
-
-.button--warn {
-  background: red;
-  color: white;
-}
-
-.button--notice {
-  background: green;
-  color: white;
-}
-
-.icon--red {
-  color: red;
-}
-.right {
-  float: right;
-}
-</style>
 
 <script>
 import Book from "@/http/Book";

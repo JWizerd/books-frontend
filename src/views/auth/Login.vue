@@ -1,33 +1,50 @@
 <template>
-  <section>
-    <div v-if="error" class="error">{{error}}</div>
-    <div class="form">
-      <h1>Login</h1>
-      <label name="email"></label>
-      <input
-        v-model.trim="user.email"
-        name="email"
-        id="email"
-        type="text"
-        placeholder="Enter email..."
-      >
-      
-      <label name="password"></label>
-      <input
-        v-model.trim="user.password"
-        name="password"
-        id="password"
-        type="password"
-        placeholder="Enter password..."
-      >
-      
-      <button @click="login">LOGIN</button>
-    </div>
+  <section class="w-full max-w-xs mt-10 mb-4">
+    <form @submit.prevent="submit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2>Login</h2>
+      <hr>
+      <div v-if="error" class="red-dark">{{error}}</div>
+      <div class="form">
+        <div class="mb-4">
+          <label for="email"></label>
+          <input
+            v-model.trim="$v.user.email.$model"
+            name="email"
+            type="email"
+            placeholder="Enter email..."
+            class="appearance-none border rounded w-full py-2 px-3"
+          >
+          <div class="text-red" v-if="!$v.user.email.required">
+            <small>required</small>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="password"></label>
+          <input
+            v-model.trim="$v.user.password.$model"
+            name="password"
+            type="password"
+            placeholder="Enter password..."
+            class="appearance-none border rounded w-full py-2 px-3"
+          >
+          <div class="text-red" v-if="!$v.user.password.required">
+            <small>required</small>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="bg-blue hover:bg-blue-dark text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >LOGIN</button>
+      </div>
+    </form>
   </section>
 </template>
 
 <script>
 import Auth from "@/http/Auth";
+import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "LoginForm",
@@ -42,10 +59,23 @@ export default {
       messages: []
     };
   },
+  validations: {
+    user: {
+      email: {
+        required
+      },
+      password: {
+        required
+      }
+    }
+  },
   methods: {
-    login() {
-      this.$store.dispatch("login", this.user);
-      this.$router.push("/books");
+    submit() {
+      this.$v.$touch();
+      if (!this.$v.$error) {
+        this.$store.dispatch("login", this.user);
+        this.$router.push("/books");
+      }
     }
   },
   computed: {
@@ -55,30 +85,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-section {
-  text-align: center;
-}
-
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-
-.error {
-  color: red;
-  text-align: center;
-}
-</style>
