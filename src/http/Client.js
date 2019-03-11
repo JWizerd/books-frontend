@@ -31,6 +31,6 @@ export default class Client {
   }
 
   async destroy(id) {
-    return await this.getClient().get(id);
+    return await this.getClient().delete(id.toString());
   }
 }

@@ -23,8 +23,7 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home,
-      beforeEnter: isAuth
+      component: Home
     },
     {
       path: "/books/create",
@@ -35,8 +34,7 @@ export default new Router({
     {
       path: "/books",
       name: "list",
-      component: List,
-      beforeEnter: isAuth
+      component: List
     },
     {
       path: "/login",

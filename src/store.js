@@ -7,19 +7,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    books: {},
     errors: {},
     user: {}
   },
   mutations: {
-    setBook(state, books) {
-      state.books = books;
-    },
     setError(state, error) {
       state.errors.push(error);
-    },
-    deleteBook(state, book) {
-      delete (state.books[`${book.key}`])
     },
     setUser(state, user) {
       state.user = user
@@ -29,7 +22,6 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    books: state => state.books,
     errors: state => state.errors,
     user: state => state.user
   },
