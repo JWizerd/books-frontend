@@ -3,8 +3,6 @@
     <div class="auth-links" v-if="isAuthenticated">
       <router-link to="/">Home</router-link>
       <strong>|</strong>
-      <router-link to="/books">All Books</router-link>
-      <strong>|</strong>
       <router-link to="/books/create">Create a Book</router-link>
       <strong>|</strong>
       <router-link to="/logout">Logout</router-link>
