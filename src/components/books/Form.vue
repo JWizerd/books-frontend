@@ -4,9 +4,12 @@
       <h1>Update a book</h1>
       <hr>
 
-      <div v-for="(error, key) in errors" :key="key">
-        <strong>{{error}}</strong>
-      </div>
+      <div
+        v-for="(error, key) in errors"
+        :key="key"
+        class="p-2 bg-red-lighter border border-red text-red-dark text-sm w-full mb-5 rounded"
+      >{{error}}</div>
+
       <div v-if="error" class="error">{{error}}</div>
 
       <div class="mb-4">
@@ -139,10 +142,14 @@ export default {
         author: `${this.book.author.first_name} ${this.book.author.last_name}`
       };
 
-      if (this.isUpdating) {
-        this.updateBook(book);
-      } else {
-        this.createBook(book);
+      this.$v.$touch();
+
+      if (!this.$v.$error) {
+        if (this.isUpdating) {
+          this.updateBook(book);
+        } else {
+          this.createBook(book);
+        }
       }
     },
     updateBook(book) {
@@ -179,16 +186,11 @@ export default {
         })
         .catch(error => {
           const errors = { ...this.errors };
-          errors[`book-${Date.now()}`] = error.message;
+          errors[`book-${Date.now()}`] = error.data.message;
           this.errors = errors;
         });
 
       this.isUpdating = true;
-    }
-  },
-  computed: {
-    error: function() {
-      return this.$store.getters.error;
     }
   }
 };

@@ -3,7 +3,11 @@
     <form @submit.prevent="submit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <h2>Sign Up</h2>
       <hr>
-      <div v-if="error" class="error">{{error}}</div>
+      <div
+        v-for="(error, key) in errors"
+        :key="key"
+        class="p-2 bg-red-lighter border border-red text-red-dark text-sm w-full mb-5 rounded"
+      >{{error}}</div>
       <div class="mb-4">
         <label for="name">Name</label>
         <input
@@ -97,7 +101,7 @@ export default {
         password: "",
         password_confirmation: ""
       },
-      error: null
+      errors: {}
     };
   },
   validations: {
@@ -130,9 +134,15 @@ export default {
         new Auth()
           .signup(this.user)
           .then(response => this.$router.push("/login"))
-          .catch(error => (this.error = error.data.message));
+          .catch(error => {
+            const errors = { ...this.errors };
+            errors[`book-${Date.now()}`] = error.data.message;
+            this.errors = errors;
+          });
       } catch (error) {
-        error => (this.error = error.message);
+        const errors = { ...this.errors };
+        errors[`book-${Date.now()}`] = error.message;
+        this.errors = errors;
       }
     }
   }

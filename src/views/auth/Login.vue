@@ -3,7 +3,11 @@
     <form @submit.prevent="submit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <h2>Login</h2>
       <hr>
-      <div v-if="error" class="red-dark">{{error}}</div>
+      <div
+        v-for="(error, key) in errors"
+        :key="key"
+        class="p-2 bg-red-lighter border border-red text-red-dark text-sm w-full mb-5 rounded"
+      >{{error}}</div>
       <div class="form">
         <div class="mb-4">
           <label for="email"></label>
