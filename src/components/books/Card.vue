@@ -7,6 +7,11 @@
     <p v-if="book.description">{{book.description}}</p>
     <div>
       <button class="button button--warn" @click="deleteBook">DELETE</button>
+      <router-link
+        :to="{ name: 'update', params: { id: book.id }}"
+        class="button button--notice"
+        tag="button"
+      >UPDATE</router-link>
     </div>
   </li>
 </template>
@@ -14,6 +19,7 @@
 <style lang="scss">
 .button {
   padding: 10px 25px;
+  margin: 10px;
   border: none;
   font-size: 1em;
   border-radius: 5px;
@@ -25,6 +31,11 @@
 
 .button--warn {
   background: red;
+  color: white;
+}
+
+.button--notice {
+  background: green;
   color: white;
 }
 

@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Create from "./views/books/Create.vue";
+import Update from "./views/books/Update.vue";
 import List from "./views/books/List.vue";
 import Login from "./views/auth/Login.vue";
 import SignUp from "./views/auth/SignUp.vue";
@@ -29,6 +30,12 @@ export default new Router({
       path: "/books/create",
       name: "create",
       component: Create,
+      beforeEnter: isAuth
+    },
+    {
+      path: "/books/update/:id",
+      name: "update",
+      component: Update,
       beforeEnter: isAuth
     },
     {
