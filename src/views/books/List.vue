@@ -1,11 +1,26 @@
 <template>
-  <div class="books">
-    <ul v-if="books">
+  <section>
+    <ul v-if="books" class="books">
       <Card v-for="book in books" :book="book" :key="book.id" @book-deleted="loadBooks"/>
     </ul>
     <div v-else>No books here yet! Go ahead and add some!</div>
-  </div>
+  </section>
 </template>
+
+<style lang="scss">
+.books {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.book-card {
+  background: #eee;
+  border: 1px solid;
+  border-radius: 5px;
+}
+</style>
 
 <script>
 import Card from "@/components/books/Card.vue";
