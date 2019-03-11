@@ -44,8 +44,7 @@ export default {
   props: ["book", "index"],
   methods: {
     deleteBook() {
-      new Book().destroy(this.book.id);
-      this.$emit("book-deleted");
+      new Book().destroy(this.book.id).then(() => this.$emit("book-deleted"));
     }
   }
 };
