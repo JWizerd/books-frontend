@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="mt-10 mb-10">
     <ul v-if="books" class="books">
       <Card v-for="book in books" :book="book" :key="book.id" @book-deleted="loadBooks"/>
     </ul>
@@ -13,12 +13,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-}
-
-.book-card {
-  background: #eee;
-  border: 1px solid;
-  border-radius: 5px;
 }
 </style>
 
@@ -35,7 +29,7 @@ export default {
       books: {}
     };
   },
-  mounted() {
+  beforeMount() {
     this.loadBooks();
   },
   methods: {

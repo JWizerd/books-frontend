@@ -1,5 +1,5 @@
 <template>
-  <li class="book-card border-black p-10 mt-10 mb-10 bg-white rounded-b shadow">
+  <li class="book-card border border-black p-10 rounded bg-transparent shadow">
     <div class="mb-8">
       <h3>{{book.title}}</h3>
       <hr>
