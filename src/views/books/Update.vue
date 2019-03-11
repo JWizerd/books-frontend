@@ -20,10 +20,23 @@
       <label name="publication_date">Publication Date</label>
       <input v-model.trim="book.publication_date" name="publication_date" type="date">
       
-      <label name="author">Author</label>
-      <input v-model.trim="author" name="author" type="text" placeholder="Joey Matone">
+      <label name="author">Author First Name</label>
+      <input
+        v-model.trim="book.author.first_name"
+        name="author_first_name"
+        type="text"
+        placeholder="Joey"
+      >
       
-      <button @click="update">ADD BOOK</button>
+      <label name="author">Author Last Name</label>
+      <input
+        v-model.trim="book.author.last_name"
+        name="author_last_name"
+        type="text"
+        placeholder="Matone"
+      >
+      
+      <button @click="update">UPDATE BOOK</button>
     </div>
   </section>
 </template>
@@ -41,8 +54,15 @@ export default {
   },
   methods: {
     update() {
+      const book = {
+        title: this.book.title,
+        description: this.book.description,
+        publication_date: this.book.publication_date,
+        author: `${this.book.author.first_name} ${this.book.author.last_name}`
+      };
+
       new Book()
-        .update(this.book.id, this.book)
+        .update(this.book.id, book)
         .then(() => {
           this.$router.push("/books");
         })
@@ -53,7 +73,7 @@ export default {
         });
     }
   },
-  mounted() {
+  beforeMount() {
     new Book().get(this.$route.params.id).then(book => {
       this.book = book.data;
     });
@@ -61,9 +81,6 @@ export default {
   computed: {
     error: function() {
       return this.$store.getters.error;
-    },
-    author: function() {
-      return `${this.book.author.first_name} ${this.book.author.last_name}`;
     }
   }
 };

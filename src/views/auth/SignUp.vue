@@ -58,7 +58,7 @@ export default {
     signUp() {
       try {
         new Auth()
-          .signup({ ...this.user })
+          .signup(this.user)
           .then(response => this.$router.push("/login"))
           .catch(error => (this.error = error.data.message));
       } catch (error) {

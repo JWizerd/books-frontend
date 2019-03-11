@@ -19,7 +19,7 @@ export default class Client {
   }
 
   async get(id) {
-    return await this.getClient().get(id);
+    return await this.getClient().get(id.toString());
   }
 
   async store(payload) {
@@ -27,7 +27,7 @@ export default class Client {
   }
 
   async update(id, payload) {
-    return await this.getClient().put(id, payload);
+    return await this.getClient().put(id.toString(), payload);
   }
 
   async destroy(id) {
