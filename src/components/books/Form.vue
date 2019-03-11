@@ -81,7 +81,7 @@
       <button
         type="submit"
         class="bg-blue hover:bg-blue-dark text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >UPDATE BOOK</button>
+      >SUBMIT</button>
     </form>
   </section>
 </template>
@@ -172,9 +172,16 @@ export default {
   },
   beforeMount() {
     if (this.$route.params.hasOwnProperty("id")) {
-      new Book().get(this.$route.params.id).then(book => {
-        this.book = book.data;
-      });
+      new Book()
+        .get(this.$route.params.id)
+        .then(book => {
+          this.book = book.data;
+        })
+        .catch(error => {
+          const errors = { ...this.errors };
+          errors[`book-${Date.now()}`] = error.message;
+          this.errors = errors;
+        });
 
       this.isUpdating = true;
     }

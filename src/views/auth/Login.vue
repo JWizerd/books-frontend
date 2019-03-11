@@ -73,8 +73,10 @@ export default {
     submit() {
       this.$v.$touch();
       if (!this.$v.$error) {
+        if (!this.error) {
+          this.$router.push("/books");
+        }
         this.$store.dispatch("login", this.user);
-        this.$router.push("/books");
       }
     }
   },

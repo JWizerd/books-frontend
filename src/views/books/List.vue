@@ -26,7 +26,8 @@ export default {
   data() {
     return {
       current_page: 0,
-      books: {}
+      books: {},
+      errors: {}
     };
   },
   beforeMount() {
@@ -40,7 +41,11 @@ export default {
           this.books = books.data.data;
           this.current_page = books.data.current_page;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          const errors = { ...this.errors };
+          errors[`book-${Date.now()}`] = error.message;
+          this.errors = errors;
+        });
     }
   }
 };
