@@ -2,7 +2,7 @@
   <section class="mt-10 mb-10">
     <h2 class="text-center mb-5">Library</h2>
     <hr>
-    <ul v-if="books" class="books">
+    <ul v-if="books" class="books p-0">
       <Card v-for="book in books" :book="book" :key="book.id" @book-deleted="loadBooks"/>
     </ul>
     <div v-else>No books here yet! Go ahead and add some!</div>
@@ -13,8 +13,10 @@
 .books {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 </style>
 
