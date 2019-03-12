@@ -1,6 +1,7 @@
 <template>
   <section class="mt-10 mb-10">
     <h2 class="text-center mb-5">Library</h2>
+    <button @click="sortByAuthor">Sort by Author</button>
     <hr>
     <ul v-if="books" class="books p-0">
       <Card v-for="book in books" :book="book" :key="book.id" @book-deleted="loadBooks"/>
@@ -29,8 +30,9 @@ export default {
   components: { Card },
   data() {
     return {
+      authorName: "",
       current_page: 0,
-      books: {},
+      books: [],
       errors: {}
     };
   },
@@ -38,6 +40,22 @@ export default {
     this.loadBooks();
   },
   methods: {
+    sortByAuthor() {
+      const booksSortedByAuthor = this.books.sort(function(a, b) {
+        const authorLastNameA = a.author.last_name.toLowerCase();
+        const authorLastNameB = b.author.last_name.toLowerCase();
+
+        if (authorLastNameA < authorLastNameB) {
+          return -1;
+        }
+        if (authorLastNameA > authorLastNameB) {
+          return 1;
+        }
+        return 0;
+      });
+
+      this.books = booksSortedByAuthor;
+    },
     loadBooks() {
       new Book()
         .show()
