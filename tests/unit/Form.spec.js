@@ -6,17 +6,20 @@ import Vuelidate from 'vuelidate'
 // NOTE: I'm missing a lot of test branches here with this component but
 // since this is a simple coding challenge I didn't add full coverage.
 // If it were a production application I would strive to have 100% test coverage,
-// using mocking for my http client / axios, data models etc.
+// using mocking for my http client / axios, data models, stubbing for lifecycle events
+// and methods etc.
 
 describe('Form', () => {
     let wrapper;
+    let router;
+    let localVue;
 
     beforeEach(() => {
         // given
-        const localVue = createLocalVue()
+        localVue = createLocalVue()
         localVue.use(VueRouter)
         localVue.use(Vuelidate)
-        const router = new VueRouter()
+        router = new VueRouter()
     })
 
     it('form component properly renders', () => {
@@ -41,19 +44,5 @@ describe('Form', () => {
         expect(wrapper.contains('input[name=publication_date]')).toBe(true);
         expect(wrapper.contains('input[name=author_first_name]')).toBe(true);
         expect(wrapper.contains('input[name=author_last_name]')).toBe(true);
-    })
-
-    it('loads a book and updates the form', () => {
-        const id = 1;
-        // when
-        wrapper = shallowMount(Form, {
-            localVue,
-            router,
-            mocks: {
-                $route: {
-                    params: { id }
-                }
-            }
-        })
     })
 })
