@@ -12,7 +12,9 @@ export default {
       } else {
         this.$router.push("/");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>

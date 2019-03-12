@@ -8,7 +8,7 @@ export const actions = {
   logout({ commit }) {
     try {
       new Auth().logout()
-        .then(auth => {
+        .then(() => {
           commit("removeUser")
           window.localStorage.removeItem('userToken');
           window.localStorage.removeItem("authenticated");
@@ -37,8 +37,7 @@ export const actions = {
       new Auth()
         .getUser()
         .then(user => {
-          console.log('TEST')
-          // commit("setUser", user.data)
+          commit("setUser", user.data)
         })
         .catch(error => commit("setError", error.data.message));
     } catch (error) {

@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength, email } from "vuelidate/lib/validators";
 import Auth from "@/http/Auth";
 import passwordConfirmation from "@/helpers/validators/passwordConfirmation";
 
@@ -111,7 +111,8 @@ export default {
         minLength: minLength(4)
       },
       email: {
-        required
+        required,
+        email
       },
       password: {
         required
@@ -133,7 +134,7 @@ export default {
       try {
         new Auth()
           .signup(this.user)
-          .then(response => this.$router.push("/login"))
+          .then(() => this.$router.push("/login"))
           .catch(error => {
             this.errors[`book-${Date.now()}`] = error.message;
           });

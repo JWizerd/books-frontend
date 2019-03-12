@@ -1,3 +1,3 @@
-export default function (value, vm) {
-    return (value, vm) => (value === vm.password);
+export function passwordConfirmation(value, vm) {
+    return value === vm.password;
 }

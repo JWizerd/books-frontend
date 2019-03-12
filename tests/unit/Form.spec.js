@@ -17,23 +17,43 @@ describe('Form', () => {
         localVue.use(VueRouter)
         localVue.use(Vuelidate)
         const router = new VueRouter()
+    })
 
+    it('form component properly renders', () => {
         // when
         wrapper = shallowMount(Form, {
             localVue,
             router
         })
-    })
 
-    it('form component properly renders', () => {
         expect(wrapper.is(Form)).toBe(true)
     })
 
     it('form has all elements needed to construct a book model', () => {
+        // when
+        wrapper = shallowMount(Form, {
+            localVue,
+            router
+        })
+
         expect(wrapper.contains('input[name=title]')).toBe(true);
         expect(wrapper.contains('input[name=description]')).toBe(true);
         expect(wrapper.contains('input[name=publication_date]')).toBe(true);
         expect(wrapper.contains('input[name=author_first_name]')).toBe(true);
         expect(wrapper.contains('input[name=author_last_name]')).toBe(true);
+    })
+
+    it('loads a book and updates the form', () => {
+        const id = 1;
+        // when
+        wrapper = shallowMount(Form, {
+            localVue,
+            router,
+            mocks: {
+                $route: {
+                    params: { id }
+                }
+            }
+        })
     })
 })

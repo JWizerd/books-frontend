@@ -47,8 +47,7 @@
 </template>
 
 <script>
-import Auth from "@/http/Auth";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, email } from "vuelidate/lib/validators";
 
 export default {
   name: "LoginForm",
@@ -66,7 +65,8 @@ export default {
   validations: {
     user: {
       email: {
-        required
+        required,
+        email
       },
       password: {
         required
