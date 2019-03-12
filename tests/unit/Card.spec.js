@@ -31,5 +31,9 @@ describe('Card.vue', () => {
 
         // then
         expect(wrapper.text()).toMatch('A TEST BOOK')
+        expect(wrapper.text()).toMatch('01-01-1991')
+        expect(wrapper.text()).toMatch('A TEST DESCRIPTION')
+        expect(wrapper.text()).toMatch('Jim')
+        expect(wrapper.text()).toMatch('Bob')
     })
 })

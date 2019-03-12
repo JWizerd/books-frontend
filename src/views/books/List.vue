@@ -1,5 +1,7 @@
 <template>
   <section class="mt-10 mb-10">
+    <h2 class="text-center mb-5">Library</h2>
+    <hr>
     <ul v-if="books" class="books">
       <Card v-for="book in books" :book="book" :key="book.id" @book-deleted="loadBooks"/>
     </ul>

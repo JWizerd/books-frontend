@@ -15,6 +15,7 @@
       <div class="mb-4">
         <label name="title">Title</label>
         <input
+          data-title
           v-model.trim="$v.book.title.$model"
           name="title"
           type="text"
@@ -29,6 +30,7 @@
       <div class="mb-4">
         <label name="description">Description</label>
         <input
+          data-description
           v-model.trim="$v.book.description.$model"
           name="description"
           type="text"
@@ -43,6 +45,7 @@
       <div class="mb-4">
         <label name="publication_date">Publication Date</label>
         <input
+          data-publication
           v-model.trim="$v.book.publication_date.$model"
           name="publication_date"
           type="date"
@@ -56,6 +59,7 @@
       <div class="mb-4">
         <label name="author">Author First Name</label>
         <input
+          date-authorfirstname
           v-model.trim="$v.book.author.first_name.$model"
           name="author_first_name"
           type="text"
@@ -70,6 +74,7 @@
       <div class="mb-4">
         <label name="author">Author Last Name</label>
         <input
+          date-authorlastname
           v-model.trim="$v.book.author.last_name.$model"
           name="author_last_name"
           type="text"
