@@ -159,9 +159,7 @@ export default {
           this.$router.push("/");
         })
         .catch(error => {
-          const errors = { ...this.errors };
-          errors[`book-${Date.now()}`] = error.message;
-          this.errors = errors;
+          this.errors[`book-${Date.now()}`] = error.message;
         });
     },
     createBook(book) {
@@ -171,9 +169,7 @@ export default {
           this.$router.push("/");
         })
         .catch(error => {
-          const errors = { ...this.errors };
-          errors[`book-${Date.now()}`] = error.message;
-          this.errors = errors;
+          this.errors[`book-${Date.now()}`] = error.message;
         });
     }
   },
@@ -185,9 +181,7 @@ export default {
           this.book = book.data;
         })
         .catch(error => {
-          const errors = { ...this.errors };
-          errors[`book-${Date.now()}`] = error.data.message;
-          this.errors = errors;
+          this.errors[`book-${Date.now()}`] = error.message;
         });
 
       this.isUpdating = true;

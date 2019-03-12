@@ -135,9 +135,7 @@ export default {
           .signup(this.user)
           .then(response => this.$router.push("/login"))
           .catch(error => {
-            const errors = { ...this.errors };
-            errors[`book-${Date.now()}`] = error.data.message;
-            this.errors = errors;
+            this.errors[`book-${Date.now()}`] = error.message;
           });
       } catch (error) {
         const errors = { ...this.errors };

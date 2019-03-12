@@ -42,9 +42,7 @@ export default {
           this.current_page = books.data.current_page;
         })
         .catch(error => {
-          const errors = { ...this.errors };
-          errors[`book-${Date.now()}`] = error.message;
-          this.errors = errors;
+          this.errors[`book-${Date.now()}`] = error.message;
         });
     }
   }
