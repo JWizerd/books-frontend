@@ -3,6 +3,11 @@ import Form from '@/components/books/Form.vue'
 import VueRouter from 'vue-router'
 import Vuelidate from 'vuelidate'
 
+// NOTE: I'm missing a lot of test branches here with this component but
+// since this is a simple coding challenge I didn't add full coverage.
+// If it were a production application I would strive to have 100% test coverage,
+// using mocking for my http client / axios, data models etc.
+
 describe('Form', () => {
     let wrapper;
 
@@ -30,20 +35,5 @@ describe('Form', () => {
         expect(wrapper.contains('input[name=publication_date]')).toBe(true);
         expect(wrapper.contains('input[name=author_first_name]')).toBe(true);
         expect(wrapper.contains('input[name=author_last_name]')).toBe(true);
-    })
-
-    it('form is rendered and is submittable with inputs relating to model props', () => {
-        const submit = jest.fn()
-        wrapper.vm.submit = submit
-
-        wrapper.find("input[name='title']").setValue("test person")
-        wrapper.find("input[name='description']").setValue("test description")
-        wrapper.find("input[name='publication_date']").setValue("01/01/2019")
-        wrapper.find("input[name='author_first_name']").setValue("test")
-        wrapper.find("input[name='author_last_name']").setValue("author")
-        wrapper.find("form").trigger("submit.prevent")
-
-        // check that form input was valid and that the form was submitted
-        expect(submit).toHaveBeenCalled()
     })
 })
